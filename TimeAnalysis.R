@@ -119,7 +119,7 @@ Sim_data <- transform(Sim_data,
                       group = factor(group, levels = H_Result$Date))
 
 gg <- ggplot(Sim_data, aes(x = Seq, y = Data, 
-                           colour = group, group = group , label = group)) +
+                           colour = group, group = group , label = group)) +ggtitle(ND$NAME[1]) +
   geom_line_interactive(aes(tooltip = tooltip, data_id = group)) +
   scale_color_viridis_d()+geom_point_interactive(aes(tooltip = TargetDate, data_id = group),size=1)
 
