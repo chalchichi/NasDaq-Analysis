@@ -26,12 +26,11 @@ mysqlpassword <- args[7]
 
 
 
-
 jusoDB <- dbConnect(
   MySQL(),
   user = mysqluser,
   password = mysqlpassword,
-  host = 'ohora.iptime.org',
+  host = "127.0.0.1",
   dbname = 'StockDB'
 )
 
