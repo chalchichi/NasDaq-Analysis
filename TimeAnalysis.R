@@ -27,8 +27,9 @@ print(Target_end_date)
 print(Days)
 print(add_days)
 print(limitcount)
+Dataurl = paste0("~/RProject/NasDaq-Analysis/",email,".csv")
 
-NasDaq_data <- read_csv("~/RProject/NasDaq-Analysis/TEMP.csv")
+NasDaq_data <- read_csv(Dataurl)
 ND <- NasDaq_data
 
 #Normalization

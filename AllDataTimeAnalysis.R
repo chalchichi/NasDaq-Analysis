@@ -45,14 +45,13 @@ print(Target_end_date)
 print(Days)
 print(add_days)
 print(limitcount)
-
-TargetData <- read_csv("~/RProject/NasDaq-Analysis/TEMP.csv")
+Dataurl = paste0("~/RProject/NasDaq-Analysis/",email,".csv")
+TargetData <- read_csv(Dataurl)
 
 Days <- nrow(TargetData)
 
 TickerList = ticker$Name
                
-  
 #Normalization
 nor_sd <- function(x){
   result = (x - mean(x)) / sd(x)
@@ -61,7 +60,6 @@ nor_sd <- function(x){
 
 Now <- TargetData$CLOSE %>% nor_sd()
 
-
 for(t in 1:length(TickerList))
 {
   ticker = TickerList[t]
@@ -69,7 +67,7 @@ for(t in 1:length(TickerList))
   qry<- sprintf("SELECT * FROM MAIN_STOCK_20Y_INF A 
 Left outer join TICKERS_MAS B 
 on A.TICKER = B.Name 
-WHERE TICKER = '%s';",ticker)
+WHERE TICKER = '%s' AND A.TDAY < '%s' ;",ticker,TargetData$TDAY[1])
   ND  <- dbGetQuery(
     jusoDB,qry
   )
@@ -118,7 +116,7 @@ for(i in 1:nrow(H_Result))
 H_Result[,"group"] = grp
 
 H_Result$end_days = as.Date(H_Result$end_days)+add_days
-H_Result = H_Result[2:nrow(H_Result),]
+H_Result = H_Result[1:nrow(H_Result),]
 
 Targetgrp  = paste0(TargetData$TDAY[1]," ~ ",TargetData$TDAY[nrow(TargetData)]," (Target)")
 
