@@ -122,7 +122,7 @@ Sim_data <- transform(Sim_data,
 gg <- ggplot(Sim_data, aes(x = Seq, y = Data, 
                            colour = group, group = group , label = group)) +ggtitle(ND$NAME[1]) +
   geom_line_interactive(aes(tooltip = tooltip, data_id = group)) +
-  scale_color_viridis_d()+geom_point_interactive(aes(tooltip = TargetDate, data_id = group),size=1)
+  geom_point_interactive(aes(tooltip = TargetDate, data_id = group),size=1)
 
 x <- girafe(ggobj = gg, width_svg = 10, height_svg = 4,
             options = list(
